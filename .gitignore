@@ -1,0 +1,11 @@
+.idea/*
+.DS_Store
+__pycache__/
+.env
+.venv
+*.pyc
+.vscode/
+*.dbsendgrid.env
+docker-compose.local.env
+celerybeat.pid
+celerybeat-schedule

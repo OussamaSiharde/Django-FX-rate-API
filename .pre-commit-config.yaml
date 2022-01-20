@@ -1,0 +1,30 @@
+-   repo: https://github.com/pre-commit/pre-commit-hooks.git
+    sha: e626cd57090d8df0be21e4df0f4e55cc3511d6ab
+    hooks:
+    -   id: check-merge-conflict
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-symlinks
+    -   id: check-json
+    -   id: check-yaml
+    -   id: trailing-whitespace
+    -   id: debug-statements
+    -   id: detect-aws-credentials
+        args:
+        - --allow-missing-credentials
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.2.3
+    hooks:
+    -   id: check-json
+    -   id: debug-statements
+    -   id: pretty-format-json
+        args:
+        - --autofix
+        exclude: Pipfile.lock
+
+-   repo: https://github.com/psf/black
+    rev: 19.10b0
+    hooks:
+    -   id: black
+        args: ['--target-version', 'py37']
