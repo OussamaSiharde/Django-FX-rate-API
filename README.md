@@ -22,6 +22,9 @@ The development environment can be managed either locally via pipenv or using do
 # build (usually, requires to build when changes happen to the Dockerfile or docker-compose.yml)
 $ make build
 
+# Load Json data to Database
+$ make load_json
+
 # start all services and dependencies
 $ make up
 

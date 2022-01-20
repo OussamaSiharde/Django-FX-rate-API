@@ -9,8 +9,5 @@ router = DefaultRouter()
 app_name = "rates"
 
 urlpatterns = [
-    path('rates/<str:date>',
-         CurrencyViewSet.as_view(),
-         name="currency",
-         ),
+    path("rates/<str:date>", CurrencyViewSet.as_view(), name="currency",),
 ]

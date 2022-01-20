@@ -23,34 +23,29 @@ class CurrencyViewSet(APIView):
     permission_classes = [permissions.AllowAny]
 
     def get(self, request, date):
-        """
-        """
-        rates = None
         rates_dict = {}
-
-        base = request.GET.get('base')
-        symbols = request.GET.get('symbols').split(',')
+        base = request.GET.get("base")
+        symbols = request.GET.get("symbols").split(",")
         currency_instance = Currency.objects.get(name=base)
-
         rates = currency_instance.rates.filter(name__in=symbols)
 
         formatted_date = datetime.strptime(
-            "{} {}".format(date, "00:00:00"), "%Y-%m-%d %H:%M:%S"
+            "{} {}".format(date, "01:00:00"), "%Y-%m-%d %H:%M:%S"
         )
-        if not rates.filter(rate_date = date).exists():
-            closest_date = rates.filter(rate_date__lt = formatted_date)\
-                .order_by('rate_date').first().rate_date
-            rates = rates.filter(rate_date=closest_date)
+
+        if not rates.filter(rate_date__date=formatted_date).exists():
+            closest_date = (
+                rates.filter(rate_date__date__lt=formatted_date)
+                .order_by("-rate_date")
+                .first()
+                .rate_date
+            )
+            rates = rates.filter(rate_date__date=closest_date)
+
         else:
-            rates = rates.filter(rate_date=formatted_date)
+            rates = rates.filter(rate_date__date=formatted_date)
 
         for rate in rates:
             rates_dict[rate.name] = rate.rate
 
-        return Response(
-            {
-                "Base": base,
-                "Date" : date,
-                "Rates": rates_dict
-            }
-        )
+        return Response({"Base": base, "Date": date, "Rates": rates_dict})

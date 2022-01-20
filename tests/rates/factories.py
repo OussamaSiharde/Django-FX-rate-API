@@ -12,12 +12,10 @@ class CurrencyFactory(factory.DjangoModelFactory):
     class Meta:
         model = Currency
 
+
 class RateFactory(factory.DjangoModelFactory):
     rate = factory.fuzzy.FuzzyDecimal(0.100, 3.500)
-    rate_date = factory.fuzzy.FuzzyDateTime(
-        timezone.now() + datetime.timedelta(days=1),
-        timezone.now() + datetime.timedelta(days=10),
-    )
+    rate_date = timezone.now()
 
     class Meta:
         model = Rate

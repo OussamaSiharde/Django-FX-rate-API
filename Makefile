@@ -2,6 +2,7 @@ help:
 	@echo "docker-compose commands:"
 	@echo "    make lint:       Run pre-commit hooks"
 	@echo "    make rm: 		Removes all docker containers running"
+	@echo "    make load_json   Load Json data to Database"
 	@echo "    make up: 		Up all services - Starts all services"
 	@echo "    make bash: 		Bash into application container"
 	@echo "    make ps:			list containers/services"
@@ -16,6 +17,9 @@ lint:
 
 rm:
 	docker-compose down && docker-compose rm -f
+
+load_json:
+	docker-compose run --rm app python manage.py load_json
 
 up:
 	docker-compose up -d
